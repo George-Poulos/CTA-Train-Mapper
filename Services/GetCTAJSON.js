@@ -11,6 +11,7 @@ let s3 = new aws.S3({
 });
 
 let GetCTAJSON = function (response, trainLine){
+    console.log("API " + s3.apiKey);
     let URL = s3.URL + "?key=" + s3.apiKey + "&rt=" + trainLine + "&outputType=" + "JSON";
     request(URL, { json: true }, (err, res, body) => {
         if (err) {
