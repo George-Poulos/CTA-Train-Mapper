@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9260f9b8-d4d3-426e-b4ce-acba48380d12" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services/GetCTAJSON.js" afterPath="$PROJECT_DIR$/Services/GetCTAJSON.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="GetCTAJSON.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Services/GetCTAJSON.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="105">
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,8 +91,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="150">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -317,12 +318,12 @@
       <updated>1507767555455</updated>
       <workItem from="1507767562438" duration="6756000" />
       <workItem from="1507831037197" duration="8000" />
-      <workItem from="1507870598666" duration="11553000" />
+      <workItem from="1507870598666" duration="11681000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18317000" />
+    <option name="totallyTimeSpent" value="18445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -379,12 +380,6 @@
           <url>file://$PROJECT_DIR$/routes/index.js</url>
           <line>6</line>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app.js</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Services/GetCTAJSON.js</url>
@@ -549,14 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configuration/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -581,10 +568,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Services/GetCTAJSON.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/GetCTAJSON.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
