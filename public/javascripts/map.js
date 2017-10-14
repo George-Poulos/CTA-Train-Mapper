@@ -9,6 +9,8 @@ let blue;
 let red;
 let brown;
 
+let i = 0;
+
 let refreshTime = 10000;
 
 setInterval(function(){
@@ -119,6 +121,10 @@ function addMarkersToMap(blue, markerIcon){
             currentOpenWindow = infoWindow;
         });
     });
-    map.fitBounds(bounds);
-    map.panToBounds(bounds);
+    if(i === 0){
+        map.fitBounds(bounds);
+        map.panToBounds(bounds);
+    }
+    i++;
+
 }
