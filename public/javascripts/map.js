@@ -9,9 +9,11 @@ let blue;
 let red;
 let brown;
 
+let refreshTime = 10000;
+
 setInterval(function(){
     refreshMap();
-},5000);
+},refreshTime);
 
 function refreshMap(){
     clearMarkers();
@@ -44,7 +46,6 @@ function getBlueLine(){
             url: "/getBlueLine",
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
-                console.log(msg);
                 blue = msg;
                 addMarkersToMap(blue, '/images/blueLine.png');
             }
@@ -59,7 +60,6 @@ function getBrownLine(){
             url: "/getBrownLine",
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
-                console.log(msg);
                 brown = msg;
                 addMarkersToMap(brown, '/images/brownLine.png');
             }
@@ -74,7 +74,6 @@ function getRedLine(){
             url: "/getRedLine",
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
-                console.log(msg);
                 red = msg;
                 addMarkersToMap(red, '/images/redLine.png');
             }
