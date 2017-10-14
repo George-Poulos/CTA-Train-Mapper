@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let getTrainJSON = require('./Services/GetCTAJSON');
+let getTrainJSON = require('../Services/GetCTAJSON');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
