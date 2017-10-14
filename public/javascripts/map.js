@@ -9,6 +9,22 @@ let blue;
 let red;
 let brown;
 
+setInterval(function(){
+    refreshMap();
+},5000);
+
+function refreshMap(){
+    clearMarkers();
+    getBlueLine();
+}
+
+function clearMarkers(){
+    let len = gMarkers.length;
+    for(let i = 0; i < len; i ++){
+        gMarkers[i].setMap(null);
+    }
+}
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
