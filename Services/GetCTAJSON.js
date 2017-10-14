@@ -5,14 +5,11 @@
 const request = require('request');
 const aws = require('aws-sdk');
 
-let s3 = new aws.S3({
-    apiKey: process.env.apiKey,
-    URL: process.env.URL
-});
+
 
 let GetCTAJSON = function (response, trainLine){
     console.log("API " + s3.apiKey);
-    let URL = s3.URL + "?key=" + s3.apiKey + "&rt=" + trainLine + "&outputType=" + "JSON";
+    let URL = global.s3.URL + "?key=" + global.s3.apiKey + "&rt=" + trainLine + "&outputType=" + "JSON";
     request(URL, { json: true }, (err, res, body) => {
         if (err) {
             console.log("Request for Json Failed!");

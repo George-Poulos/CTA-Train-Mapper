@@ -8,7 +8,10 @@ let bodyParser = require('body-parser');
 let index = require('./routes/index');
 let users = require('./routes/users');
 let getTrainJSON = require('./Services/GetCTAJSON');
-
+global.s3 = new aws.S3({
+    apiKey: process.env.apiKey,
+    URL: process.env.URL
+});
 
 let app = express();
 
