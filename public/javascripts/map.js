@@ -1,10 +1,13 @@
 'use strict';
+
 let map;
 let bounds;
 
 
 let currentOpenWindow = null;
 let gMarkers = [];
+let gWindows = [];
+
 let blue;
 let red;
 let brown;
@@ -18,7 +21,7 @@ setInterval(function(){
 },refreshTime);
 
 function refreshMap(){
-    clearMarkers();
+   // clearMarkers();
     getBlueLine();
 }
 
@@ -29,6 +32,9 @@ function clearMarkers(){
     }
 }
 
+/**
+ * Google Api initMap Function (gets called onLoad)
+ */
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -37,7 +43,7 @@ function initMap() {
     });
 
     bounds  = new google.maps.LatLngBounds();
-    Promise.resolve('success').resolve(getBlueLine());
+    Promise.resolve('success').then(getBlueLine());
 }
 
 
@@ -103,24 +109,37 @@ function addMarkersToMap(trains, lineColor, markerIcon){
     }
 
     markers.forEach(function(feature) {
-        let marker = new google.maps.Marker({
-            position: feature.position,
-            icon: markerIcon,
-            map: map
-        });
-        gMarkers.push(marker);
-        let infoWindow = new google.maps.InfoWindow({
-            content : "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p><p>Run Number : " + feature.rn + "</p>"
-        });
-        marker.addListener('click', function() {
 
-            if(currentOpenWindow !== null) {
-                currentOpenWindow.close();
-            }
+        if((lineColor + feature.rn) in gMarkers){
+            gMarkers[lineColor + feature.rn].setPosition(feature.position);
+            gWindows[lineColor + feature.rn].setContent("<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p><p>Run Number : " + feature.rn + "</p>");
+        }
 
-            infoWindow.open(map, marker);
-            currentOpenWindow = infoWindow;
-        });
+        else {
+            gMarkers[lineColor + feature.rn] = new google.maps.Marker({
+                position: feature.position,
+                icon: markerIcon,
+                map: map
+            });
+
+            gWindows[lineColor + feature.rn] = new google.maps.InfoWindow({
+                content: "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p><p>Run Number : " + feature.rn + "</p>"
+            });
+
+            let infoWindow = gWindows[lineColor + feature.rn];
+            let marker = gMarkers[lineColor + feature.rn];
+
+
+            marker.addListener('click', function () {
+
+                if (currentOpenWindow !== null) {
+                    currentOpenWindow.close();
+                }
+
+                infoWindow.open(map, marker);
+                currentOpenWindow = infoWindow;
+            });
+        }
     });
     if(i === 0){
         map.fitBounds(bounds);
