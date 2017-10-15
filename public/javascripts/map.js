@@ -24,9 +24,9 @@ function refreshMap(){
 
 function clearMarkers(){
     let len = gMarkers.length;
-    for(let i = 0; i < len; i ++){
-        gMarkers[i].setMap(null);
-    }
+    // for(let i = 0; i < len; i ++){
+    //     gMarkers[i].setMap(null);
+    // }
 }
 
 function initMap() {
@@ -49,7 +49,7 @@ function getBlueLine(){
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
                 blue = msg;
-                addMarkersToMap(blue, '/images/blueLine.png');
+                addMarkersToMap(blue, 'blue', '/images/blueLine.png');
             }
         });
         Promise.resolve('success').then(getBrownLine());
@@ -63,7 +63,7 @@ function getBrownLine(){
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
                 brown = msg;
-                addMarkersToMap(brown, '/images/brownLine.png');
+                addMarkersToMap(brown, 'brown', '/images/brownLine.png');
             }
         });
         Promise.resolve('success').then(getRedLine());
@@ -77,37 +77,43 @@ function getRedLine(){
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
                 red = msg;
-                addMarkersToMap(red, '/images/redLine.png');
+                addMarkersToMap(red, 'red', '/images/redLine.png');
             }
         });
         Promise.resolve('Success');
 }
 
-function addMarkersToMap(blue, markerIcon){
+function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
-    for (let i = 0; i < blue.length; i++){
-        let lat = parseFloat(blue[i].lat);
-        let lon = parseFloat(blue[i].lon);
-        let type = blue[i].nextStaNm;
+
+    for (let i = 0; i < trains.length; i++){
+        let lat = parseFloat(trains[i].lat);
+        let lon = parseFloat(trains[i].lon);
+        let type = trains[i].nextStaNm;
         let tmp = new google.maps.LatLng(lat, lon);
         bounds.extend(tmp);
         markers.push({
             position: tmp,
             type: type,
-            nextStaNm: blue[i].nextStaNm,
-            arrT: blue[i].arrT,
-            destNm: blue[i].destNm
+            nextStaNm: trains[i].nextStaNm,
+            arrT: trains[i].arrT,
+            destNm: trains[i].destNm,
+            rn : trains[i].rn
         });
     }
 
-    // Create markers.
     markers.forEach(function(feature) {
-        let marker = new google.maps.Marker({
-            position: feature.position,
-            icon: markerIcon,
-            map: map
-        });
-        gMarkers.push(marker);
+        if(gMarkers[lineColor + feature.rn] !== null){
+            marker.setPosition(feature.position);
+        }
+        else {
+            let marker = new google.maps.Marker({
+                position: feature.position,
+                icon: markerIcon,
+                map: map
+            });
+            gMarkers[lineColor + feature.rn] = marker;
+        }
         let infoWindow = new google.maps.InfoWindow({
             content : "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p>"
         });
