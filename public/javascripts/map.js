@@ -104,7 +104,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
 
     markers.forEach(function(feature) {
         if(gMarkers[lineColor + feature.rn] !== null){
-            marker.setPosition(feature.position);
+            gMarkers[lineColor + feature.rn].setPosition(feature.position);
         }
         else {
             let marker = new google.maps.Marker({
