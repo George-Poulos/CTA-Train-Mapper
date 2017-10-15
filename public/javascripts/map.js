@@ -110,7 +110,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
         });
         gMarkers.push(marker);
         let infoWindow = new google.maps.InfoWindow({
-            content : "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p>"
+            content : "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p><p>Run Number : " + feature.rn + "</p>"
         });
         marker.addListener('click', function() {
 
