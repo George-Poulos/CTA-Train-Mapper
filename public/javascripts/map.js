@@ -24,9 +24,9 @@ function refreshMap(){
 
 function clearMarkers(){
     let len = gMarkers.length;
-    // for(let i = 0; i < len; i ++){
-    //     gMarkers[i].setMap(null);
-    // }
+    for(let i = 0; i < len; i ++){
+        gMarkers[i].setMap(null);
+    }
 }
 
 function initMap() {
@@ -103,17 +103,12 @@ function addMarkersToMap(trains, lineColor, markerIcon){
     }
 
     markers.forEach(function(feature) {
-        if(((lineColor + feature.rn) in gMarkers)){
-            gMarkers[lineColor + feature.rn].setPosition(feature.position);
-        }
-        else {
-            let marker = new google.maps.Marker({
-                position: feature.position,
-                icon: markerIcon,
-                map: map
-            });
-            gMarkers[lineColor + feature.rn] = marker;
-        }
+        let marker = new google.maps.Marker({
+            position: feature.position,
+            icon: markerIcon,
+            map: map
+        });
+        gMarkers.push(marker);
         let infoWindow = new google.maps.InfoWindow({
             content : "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p>"
         });
