@@ -103,7 +103,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
     }
 
     markers.forEach(function(feature) {
-        if(!((lineColor + feature.rn) in gMarkers)){
+        if(((lineColor + feature.rn) in gMarkers)){
             gMarkers[lineColor + feature.rn].setPosition(feature.position);
         }
         else {
