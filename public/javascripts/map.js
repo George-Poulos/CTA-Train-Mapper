@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * @author George Poulos and Ashour Dankha
+ *
+ * File for client side visualization using Google Maps api.
+ */
+
+
 let map;
 let bounds;
 
@@ -8,9 +15,7 @@ let currentOpenWindow = null;
 let gMarkers = [];
 let gWindows = [];
 
-let blue;
-let red;
-let brown;
+let blue, red, brown, pink, green, orange, purple, yellow;
 
 let i = 0;
 
@@ -21,11 +26,10 @@ setInterval(function(){
 },refreshTime);
 
 function refreshMap(){
-   // clearMarkers();
     getBlueLine();
 }
 
-function clearMarkers(){
+function clearOldMarkers(){
     let len = gMarkers.length;
     for(let i = 0; i < len; i ++){
         gMarkers[i].setMap(null);
@@ -86,7 +90,77 @@ function getRedLine(){
                 addMarkersToMap(red, 'red', '/images/redLine.png');
             }
         });
-        Promise.resolve('Success');
+        Promise.resolve('Success').then(getPinkLine());
+}
+
+function getPinkLine(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "/getPinkLine",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            pink = msg;
+            addMarkersToMap(pink, 'pink', '/images/pinkLine.png');
+        }
+    });
+    Promise.resolve('Success').then(getGreenLine());
+}
+
+function getGreenLine(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "/getGreenLine",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            green = msg;
+            addMarkersToMap(green, 'green', '/images/greenLine.png');
+        }
+    });
+    Promise.resolve('Success').then(getOrangeLine());
+}
+
+function getOrangeLine(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "/getOrangeLine",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            orange = msg;
+            addMarkersToMap(orange, 'orange', '/images/orangeLine.png');
+        }
+    });
+    Promise.resolve('Success').then(getPurpleLine());
+}
+
+function getPurpleLine(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "/getPurpleLine",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            purple = msg;
+            addMarkersToMap(purple, 'purple', '/images/purpleLine.png');
+        }
+    });
+    Promise.resolve('Success').then(getYellowLine());
+}
+
+function getYellowLine(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "/getPinkLine",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            yellow = msg;
+            addMarkersToMap(yellow, 'yellow', '/images/yellowLine.png');
+        }
+    });
+    Promise.resolve('Success');
 }
 
 function addMarkersToMap(trains, lineColor, markerIcon){
@@ -141,7 +215,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             });
         }
     });
-    if(i === 0){
+    if(i === 3){
         map.fitBounds(bounds);
         map.panToBounds(bounds);
     }
