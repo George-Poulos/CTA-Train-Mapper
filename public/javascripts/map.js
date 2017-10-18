@@ -15,6 +15,7 @@ let currentOpenWindow = null;
 let gMarkers = [];
 let gWindows = [];
 
+
 let blue = [], red = [], brown = [], pink = [], green = [], orange = [], purple = [], yellow = [];
 
 let i = 0;
@@ -165,7 +166,7 @@ function getYellowLine(){
 
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
-    
+
     for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
@@ -199,6 +200,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             gWindows[lineColor + feature.rn] = new google.maps.InfoWindow({
                 content: "<p>Next Stop : " + feature.nextStaNm + "</p><p>Direction : " + feature.destNm + "</p><p> Arrival Time : " + feature.arrT.substr(11) + "</p><p>Run Number : " + feature.rn + "</p>"
             });
+            gMarkers[lineColor + feature.rn].setDuration(2000);
 
             let infoWindow = gWindows[lineColor + feature.rn];
             let marker = gMarkers[lineColor + feature.rn];
