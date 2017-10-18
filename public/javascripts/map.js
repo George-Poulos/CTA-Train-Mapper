@@ -15,7 +15,7 @@ let currentOpenWindow = null;
 let gMarkers = [];
 let gWindows = [];
 
-let blue, red, brown, pink, green, orange, purple, yellow;
+let blue = [], red = [], brown = [], pink = [], green = [], orange = [], purple = [], yellow = [];
 
 let i = 0;
 
@@ -153,7 +153,7 @@ function getYellowLine(){
     $.ajax({
         type: "POST",
         dataType: 'json',
-        url: "/getPinkLine",
+        url: "/getYellowLine",
         contentType: "application/json; charset=utf-8",
         success: function (msg) {
             yellow = msg;
@@ -165,7 +165,7 @@ function getYellowLine(){
 
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
-
+    
     for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
