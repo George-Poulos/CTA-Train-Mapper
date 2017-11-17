@@ -170,17 +170,19 @@ function addMarkersToMap(trains, lineColor, markerIcon){
     for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
-        let type = trains[i].nextStaNm;
-        let tmp = new google.maps.LatLng(lat, lon);
-        bounds.extend(tmp);
-        markers.push({
-            position: tmp,
-            type: type,
-            nextStaNm: trains[i].nextStaNm,
-            arrT: trains[i].arrT,
-            destNm: trains[i].destNm,
-            rn : trains[i].rn
-        });
+        if(!(lat === 0 && lon === 0)){
+            let type = trains[i].nextStaNm;
+            let tmp = new google.maps.LatLng(lat, lon);
+            bounds.extend(tmp);
+            markers.push({
+                position: tmp,
+                type: type,
+                nextStaNm: trains[i].nextStaNm,
+                arrT: trains[i].arrT,
+                destNm: trains[i].destNm,
+                rn : trains[i].rn
+            });
+        }
     }
 
     markers.forEach(function(feature) {
@@ -217,7 +219,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             });
         }
     });
-    if(i === 3){
+    if(i === 6){
         map.fitBounds(bounds);
         map.panToBounds(bounds);
     }
