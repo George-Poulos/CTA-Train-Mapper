@@ -5,4 +5,4 @@ a train, you may view the direction it is headed, estimated time to next stop an
 
 This app was built on top of Node.js
 
-[Link to the App](https://cta-train-tracker.herokuapp.com/)
+[Link to the App](https://cta-train-tracker.herokuapp.com/) (May take a moment to load due to heroku spin up)
