@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
 app.use('/getBlueLine', function(req,res){
     getTrainJSON(res,"blue");
 });
@@ -36,6 +37,21 @@ app.use('/getRedLine', function(req,res){
 });
 app.use('/getBrownLine', function(req,res){
     getTrainJSON(res,"brn");
+});
+app.use('/getPinkLine', function(req,res){
+    getTrainJSON(res,"pink");
+});
+app.use('/getGreenLine', function(req,res){
+    getTrainJSON(res,"g");
+});
+app.use('/getOrangeLine', function(req,res){
+    getTrainJSON(res,"org");
+});
+app.use('/getPurpleLine', function(req,res){
+    getTrainJSON(res,"p");
+});
+app.use('/getYellowLine', function(req,res){
+    getTrainJSON(res,"y");
 });
 
 

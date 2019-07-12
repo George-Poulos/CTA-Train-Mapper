@@ -1,5 +1,7 @@
 /**
  * Created by George on 10/11/17.
+ *
+ * @TODO - switch to pull all trains at once, then parse all trains by color.
  */
 
 const request = require('request');
@@ -7,7 +9,6 @@ const request = require('request');
 
 
 let GetCTAJSON = function (response, trainLine){
-    console.log("API " + global.apiKey);
     let URL = global.URL + "?key=" + global.apiKey + "&rt=" + trainLine + "&outputType=" + "JSON";
     request(URL, { json: true }, (err, res, body) => {
         if (err) {
