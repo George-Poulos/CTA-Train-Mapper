@@ -28,7 +28,7 @@ class CTAService {
 
         URL += "&rt=" + trainLines;
 
-        if(cachedResult !== undefined && Date.now() - cachedResult.timeStamp <= cacheLife) {
+        if(cachedResult.timeStamp !== undefined && Date.now() - cachedResult.timeStamp <= cacheLife) {
             response.json(cachedResult.json);
             return;
         }
