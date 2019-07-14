@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @author George Poulos and Ashour Dankha
+ * @author George Poulos
  *
  * File for client side visualization using Google Maps api.
  */
@@ -79,6 +79,8 @@ function parseCTAResponse(res){
 
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
+
+    if(trains === undefined) return;
 
     for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
