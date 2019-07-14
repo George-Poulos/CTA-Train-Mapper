@@ -82,7 +82,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
 
     if(trains === undefined || trains.length === undefined) return;
 
-    for (let i = 0; i < trains.length; i++){
+    for (i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
         if(!(lat === 0 && lon === 0)){
