@@ -134,7 +134,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             });
         }
     });
-    if(i === 6){
+    if(i === trains.length){
         map.fitBounds(bounds);
         map.panToBounds(bounds);
     }
