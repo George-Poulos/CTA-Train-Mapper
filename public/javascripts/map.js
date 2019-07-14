@@ -80,7 +80,7 @@ function parseCTAResponse(res){
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
 
-    if(trains === undefined) return;
+    if(trains === undefined || trains.length === undefined) return;
 
     for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
