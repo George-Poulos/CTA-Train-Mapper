@@ -25,7 +25,7 @@ google.maps.Marker.prototype.animateTo = function(newPosition, options) {
   }
 
   // throw exception if easing function doesn't exist
-  if (options.easing != 'linear') {            
+  if (options.easing != 'linear') {
     if (typeof jQuery == 'undefined' || !jQuery.easing[options.easing]) {
       throw '"' + options.easing + '" easing function doesn\'t exist. Include jQuery and/or the jQuery easing plugin and use the right function name.';
       return;
@@ -57,7 +57,7 @@ google.maps.Marker.prototype.animateTo = function(newPosition, options) {
   //if AT_setPositionNoAnimation set, it will be called instead of setPosition.
   var setPosition = this.AT_setPositionNoAnimation || this.setPosition;
 
-  var animateStep = function(marker, startTime) {            
+  var animateStep = function(marker, startTime) {
     var ellapsedTime = (new Date()).getTime() - startTime;
     var durationRatio = ellapsedTime / options.duration; // 0 - 1
     var easingDurationRatio = durationRatio;
