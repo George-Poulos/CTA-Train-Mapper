@@ -1,2 +1,3 @@
 configuration/
-.idea/
+**/.idea/**
+.DS_Store

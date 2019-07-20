@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @author George Poulos and Ashour Dankha
+ * @author George Poulos
  *
  * File for client side visualization using Google Maps api.
  */
@@ -17,6 +17,8 @@ let gWindows = [];
 
 
 let blue = [], red = [], brown = [], pink = [], green = [], orange = [], purple = [], yellow = [];
+
+let lineMap = {'red' : 'red', 'blue' : 'blue', 'brn' : 'brown', 'g' : 'green', 'org' : 'orange', 'p' : 'purple', 'pink' : 'pink', 'y' : 'yellow'};
 
 let i = 0;
 
@@ -48,7 +50,7 @@ function initMap() {
     });
 
     bounds  = new google.maps.LatLngBounds();
-    Promise.resolve('success').then(getBlueLine());
+    Promise.resolve('Success').then(getBlueLine());
 }
 
 
@@ -56,118 +58,31 @@ function getBlueLine(){
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: "/getBlueLine",
+            url: "/getLinesLocation",
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
-                blue = msg;
-                addMarkersToMap(blue, 'blue', '/images/blueLine.png');
+                parseCTAResponse(msg);
             }
         });
-        Promise.resolve('success').then(getBrownLine());
+        Promise.resolve('success');
 }
 
-function getBrownLine(){
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/getBrownLine",
-            contentType: "application/json; charset=utf-8",
-            success: function (msg) {
-                brown = msg;
-                addMarkersToMap(brown, 'brown', '/images/brownLine.png');
-            }
-        });
-        Promise.resolve('success').then(getRedLine());
-}
+function parseCTAResponse(res){
+    if(res === undefined) return;
 
-function getRedLine(){
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/getRedLine",
-            contentType: "application/json; charset=utf-8",
-            success: function (msg) {
-                red = msg;
-                addMarkersToMap(red, 'red', '/images/redLine.png');
-            }
-        });
-        Promise.resolve('Success').then(getPinkLine());
-}
-
-function getPinkLine(){
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "/getPinkLine",
-        contentType: "application/json; charset=utf-8",
-        success: function (msg) {
-            pink = msg;
-            addMarkersToMap(pink, 'pink', '/images/pinkLine.png');
-        }
+    let routes = res.ctatt.route;
+    routes.forEach(function(route){
+        let line =  lineMap[route['@name']];
+        addMarkersToMap(route.train, line, '/images/' + line + 'Line.png')
     });
-    Promise.resolve('Success').then(getGreenLine());
-}
-
-function getGreenLine(){
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "/getGreenLine",
-        contentType: "application/json; charset=utf-8",
-        success: function (msg) {
-            green = msg;
-            addMarkersToMap(green, 'green', '/images/greenLine.png');
-        }
-    });
-    Promise.resolve('Success').then(getOrangeLine());
-}
-
-function getOrangeLine(){
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "/getOrangeLine",
-        contentType: "application/json; charset=utf-8",
-        success: function (msg) {
-            orange = msg;
-            addMarkersToMap(orange, 'orange', '/images/orangeLine.png');
-        }
-    });
-    Promise.resolve('Success').then(getPurpleLine());
-}
-
-function getPurpleLine(){
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "/getPurpleLine",
-        contentType: "application/json; charset=utf-8",
-        success: function (msg) {
-            purple = msg;
-            addMarkersToMap(purple, 'purple', '/images/purpleLine.png');
-        }
-    });
-    Promise.resolve('Success').then(getYellowLine());
-}
-
-function getYellowLine(){
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: "/getYellowLine",
-        contentType: "application/json; charset=utf-8",
-        success: function (msg) {
-            yellow = msg;
-            addMarkersToMap(yellow, 'yellow', '/images/yellowLine.png');
-        }
-    });
-    Promise.resolve('Success');
 }
 
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
 
-    for (let i = 0; i < trains.length; i++){
+    if(trains === undefined || trains.length === undefined) return;
+
+    for (i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
         if(!(lat === 0 && lon === 0)){
@@ -219,7 +134,7 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             });
         }
     });
-    if(i === 6){
+    if(i === trains.length){
         map.fitBounds(bounds);
         map.panToBounds(bounds);
     }
