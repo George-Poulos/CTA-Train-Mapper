@@ -17,19 +17,25 @@ let gWindows = [];
 
 
 let blue = [], red = [], brown = [], pink = [], green = [], orange = [], purple = [], yellow = [];
-
 let lineMap = {'red' : 'red', 'blue' : 'blue', 'brn' : 'brown', 'g' : 'green', 'org' : 'orange', 'p' : 'purple', 'pink' : 'pink', 'y' : 'yellow'};
-
-let i = 0;
-
+let k = 0;
 let refreshTime = 10000;
+
+$("#adjust_view").on("click", function (){
+    adjustView();
+});
 
 setInterval(function(){
     refreshMap();
 },refreshTime);
 
 function refreshMap(){
-    getBlueLine();
+    getAllLines();
+}
+
+function adjustView(){
+    map.fitBounds(bounds);
+    map.panToBounds(bounds);
 }
 
 function clearOldMarkers(){
@@ -50,11 +56,13 @@ function initMap() {
     });
 
     bounds  = new google.maps.LatLngBounds();
-    Promise.resolve('Success').then(getBlueLine());
+    Promise.resolve('Success').then(getAllLines());
 }
 
-
-function getBlueLine(){
+/**
+ * Make a backend call to gather train locations
+ */
+function getAllLines(){
         $.ajax({
             type: "POST",
             dataType: 'json',
@@ -67,6 +75,10 @@ function getBlueLine(){
         Promise.resolve('success');
 }
 
+/**
+ * Parse the locations and informations per train
+ * @param res
+ */
 function parseCTAResponse(res){
     if(res === undefined) return;
 
@@ -75,14 +87,22 @@ function parseCTAResponse(res){
         let line =  lineMap[route['@name']];
         addMarkersToMap(route.train, line, '/images/' + line + 'Line.png')
     });
+    if (k===0) adjustView();
+    k++;
 }
 
+/**
+ * Using the parsed locations to add it to the maps
+ * @param trains
+ * @param lineColor
+ * @param markerIcon
+ */
 function addMarkersToMap(trains, lineColor, markerIcon){
     let markers = [];
 
     if(trains === undefined || trains.length === undefined) return;
 
-    for (i = 0; i < trains.length; i++){
+    for (let i = 0; i < trains.length; i++){
         let lat = parseFloat(trains[i].lat);
         let lon = parseFloat(trains[i].lon);
         if(!(lat === 0 && lon === 0)){
@@ -134,10 +154,4 @@ function addMarkersToMap(trains, lineColor, markerIcon){
             });
         }
     });
-    if(i === trains.length){
-        map.fitBounds(bounds);
-        map.panToBounds(bounds);
-    }
-    i++;
-
 }

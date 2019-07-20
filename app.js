@@ -6,7 +6,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let index = require('./routes/index');
 let users = require('./routes/users');
-let CTAService = require('./Services/CTAService');
+let CTAService = require('./services/CTAService');
 let app = express();
 
 const ctaService = new CTAService();
