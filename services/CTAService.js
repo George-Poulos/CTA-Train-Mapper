@@ -39,8 +39,7 @@ class CTAService {
                 return console.log(err);
             }
             else {
-                cachedResult.timeStamp = Date.now();
-                cachedResult.json = res.body;
+                cachedResult.resetCache(Date.now(), res.body);
                 response.json(cachedResult.json);
             }
         });

@@ -10,7 +10,7 @@ class JSONCache{
    }
 
    resetCache(timestamp, json){
-       this.timeStamp = timeStamp;
+       this.timeStamp = timestamp;
        this.json = json;
    }
 }
